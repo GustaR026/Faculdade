@@ -1,0 +1,17 @@
+#Comando para Simular a Memoria Cache no gem5
+	
+build/X86/gem5.opt configs/deprecated/example/se.py --caches --l2cache --l1d_size=32kB --l1i_size=32kB --l2_size=2MB --l1d_assoc=1 --cmd=./matmul
+
+#Dados da simulação no gem5
+
+
+echo "--- Mapeamento Direto (matmul, assoc=1) ---"
+egrep "dcache.overall|icache.overall|system.l2.overall" m5out_matmul_direto/stats.txt
+echo ""
+
+echo "--- Conjunto-Associativo 4-way (matmul, assoc=4) ---"
+egrep "dcache.overall|icache.overall|system.l2.overall" m5out_matmul_conjunto4/stats.txt
+echo ""
+
+echo "--- Totalmente Associativo (matmul, assoc=512) ---"
+egrep "dcache.overall|icache.overall|system.l2.overall" m5out_matmul_associativo/stats.txt
